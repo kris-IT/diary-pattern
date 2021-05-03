@@ -1,0 +1,26 @@
+createTemplate() {
+ name=$1
+ path=$DIARY_PATH/templates
+	if [ ! -d $path ]
+	then
+ mkdir -p $path
+	fi
+
+	$EDITOR $path/$name
+}
+
+printTemplates(){
+ ls $DIARY_PATH/templates -1
+}
+
+createNoteFromTemplate() {
+ name=`generateFile`
+ templatePath=$DIARY_PATH/templates/$1
+	if [! -e templatePath ]
+	then
+		echo $templatePath not found
+	else
+ cp $templatePath $name
+		$EDITOR $name
+	fi
+}
